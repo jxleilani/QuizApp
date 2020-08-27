@@ -2,6 +2,7 @@
 var hidden = document.getElementsByClassName("hide");
 var startContainer = document.getElementsByClassName("start-container");
 //score
+var scoreEl = document.getElementById("score");
 var score = 0;
 //question text
 var title = document.getElementById("title");
@@ -73,6 +74,7 @@ function renderQuestion(){
 
     //event listeners for answers
     answer1El.addEventListener("click",function(){
+        
         if(questionArray[currentQuestion].answer === "a"){
             answer1El.style.backgroundColor = "green";
             score = score + 5;
@@ -80,6 +82,10 @@ function renderQuestion(){
             answer1El.style.backgroundColor = "red";
             score = score - 1;
         }
+
+        answer2El.style.pointerEvents = "none";
+        answer3El.style.pointerEvents = "none";
+        answer4El.style.pointerEvents = "none";
     });
     answer2El.addEventListener("click",function(){
         if(questionArray[currentQuestion].answer === "b"){
@@ -89,6 +95,9 @@ function renderQuestion(){
             answer2El.style.backgroundColor = "red";
             score = score - 1;
         }
+        answer1El.style.pointerEvents = "none";
+        answer3El.style.pointerEvents = "none";
+        answer4El.style.pointerEvents = "none";
     });
     answer3El.addEventListener("click",function(){
         if(questionArray[currentQuestion].answer === "c"){
@@ -98,6 +107,9 @@ function renderQuestion(){
             answer3El.style.backgroundColor = "red";
             score = score - 1;
         }
+        answer1El.style.pointerEvents = "none";
+        answer2El.style.pointerEvents = "none";
+        answer4El.style.pointerEvents = "none";
     });
     answer4El.addEventListener("click",function(){
         if(questionArray[currentQuestion].answer === "d"){
@@ -107,6 +119,9 @@ function renderQuestion(){
             answer4El.style.backgroundColor = "red";
             score = score - 1;
         }
+        answer1El.style.pointerEvents = "none";
+        answer2El.style.pointerEvents = "none";
+        answer3El.style.pointerEvents = "none";
     });
 
 
@@ -118,7 +133,7 @@ btnNext.addEventListener("click", function(){
     if(currentQuestion < questionArray.length -1){
         currentQuestion++;
     }else{
-        alert("score");
+        window.location.replace("./highscores.html");
     }
 
     //set the background color back to white
@@ -126,6 +141,11 @@ btnNext.addEventListener("click", function(){
     answer2El.style.backgroundColor = "#fff";
     answer3El.style.backgroundColor = "#fff";
     answer4El.style.backgroundColor = "#fff";
+    //turn pointer events back on
+    answer1El.style.pointerEvents = "auto";
+    answer2El.style.pointerEvents = "auto";
+    answer3El.style.pointerEvents = "auto";
+    answer4El.style.pointerEvents = "auto";
     //render the next question
     renderQuestion();
 

@@ -18,29 +18,29 @@ var answer4El = document.getElementById("answer4");
 var questionArray = [
     {
         id: "Question 1",
-        question: "What is 1+1?",
-        a: "The answer is 2 The answer is 2",
-        b: "The answer is 0",
-        c: "The answer is 4",
-        d: "The answer is 8",
+        question: "Inside which element do we put the JavaScript?",
+        a: "<script>",
+        b: "<javascript>",
+        c: "<link>",
+        d: "<js>",
         answer: "a"
     },
     {
         id: "Question 2",
-        question: "What is 2+2?",
-        a: 0,
-        b: 1,
-        c: 4,
-        d: 2,
+        question: "How do you write Hello World as an alert?",
+        a: 'alert = "Hello World";',
+        b: "alert(Hello World);",
+        c: 'alert("Hello World");',
+        d: 'msg(Hello World);',
         answer: "c"
     },
     {
         id: "Question 3",
-        question: "What is 3+3? asjfoiwerwlaejslkdfjakljflsdkjklsjfklsdjf",
-        a: "apples",
-        b: "6 Six is the answer",
-        c: "wrong answer",
-        d: "wrong answer again",
+        question: "How do you create a function in JavaScript?",
+        a: "function = myFunction",
+        b: "function myFunction()",
+        c: "myFunction()",
+        d: "new function;",
         answer: "b"
     }
 ]
@@ -137,7 +137,7 @@ function renderQuestion(){
         answer3El.style.pointerEvents = "none";
     });
 
-    
+
 //Next button
 var btnNext = document.getElementById("next");
 btnNext.addEventListener("click", function(){   

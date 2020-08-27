@@ -1,7 +1,9 @@
 //hidden objects
 var hidden = document.getElementsByClassName("hide");
 var startContainer = document.getElementsByClassName("start-container");
+var main = document.getElementById("main");
 //score
+var highscoresEl = document.getElementById("highscores");
 var scoreEl = document.getElementById("score");
 var score = 0;
 //question text
@@ -47,11 +49,22 @@ var questionArray = [
 var timerEl = document.getElementById("timer");
 var seconds = 0;
 
+// function startTimer(){
+//     setInterval(function(){
+//         seconds++;
+//         timerEl.textContent = "Timer: " + seconds;
+//     }, 1000);
+// }
+
+
+
+var myTimer = setInterval(startTimer, 1000);
 function startTimer(){
-    setInterval(function(){
-        seconds++;
-        timerEl.textContent = "Timer: " + seconds;
-    }, 1000);
+    seconds++;
+    timerEl.textContent = "Timer: " + seconds;
+}
+function stopTimer(){
+    clearInterval(myTimer);
 }
 
 
@@ -124,7 +137,7 @@ function renderQuestion(){
         answer3El.style.pointerEvents = "none";
     });
 
-
+    
 //Next button
 var btnNext = document.getElementById("next");
 btnNext.addEventListener("click", function(){   
@@ -133,7 +146,10 @@ btnNext.addEventListener("click", function(){
     if(currentQuestion < questionArray.length -1){
         currentQuestion++;
     }else{
-        window.location.replace("./highscores.html");
+        stopTimer();
+        main.style.display = "none";
+        highscoresEl.style.display = "block";
+        scoreEl.textContent = score;
     }
 
     //set the background color back to white
@@ -151,26 +167,6 @@ btnNext.addEventListener("click", function(){
 
     console.log(score);
 });
-
-
-
-
-
-var answerEl = document.querySelectorAll(".answer");
-
-// answerEl.forEach(function(element){
-//         element.addEventListener("mouseover", function(){
-//         event.target.style.backgroundColor = "#925999"; 
-//         });
-//         // element.addEventListener("mouseleave", function(){
-//         // event.target.style.backgroundColor = "#fff"; 
-//         //     if(!element.classList.contains("correct")){
-                
-//         //     }
-//         // });
-// });
-
-
 
 
 //Start Button

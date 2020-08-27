@@ -11,7 +11,7 @@
     <nav class="scores">
         <a href="highscores.html">High Scores</a>
     </nav>
-    <div class="container hide">
+    <div class="container hide" id="main">
         <div id="title" class="hide">
             <h2>Title</h2></div>
         <div id="question" class="hide">Question</div>
@@ -29,6 +29,16 @@
             <button id="next">Next</button>
         </div>
     </div>
+    <div class="container hide" id="highscores">
+        <div id="title">
+            <h2>High Scores</h2>
+        </div>
+        <div id="highscores">
+            <h3>All done!</h3>
+            <br>
+            <p>Your score is: <span id="score">0</span></p>
+        </div>
+    </div>
     <div class="timer-container hide" id="timer">
         <h3>Timer</h3>
     </div>
@@ -36,6 +46,6 @@
         <button id="start">Start</button>
     </div>
 
-    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="./script.js"></script>
 </body>
 </html>

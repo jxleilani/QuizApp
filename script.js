@@ -5,7 +5,10 @@ var main = document.getElementById("main");
 //score
 var highscoresEl = document.getElementById("highscores");
 var scoreEl = document.getElementById("score");
+var scoreName = document.getElementById("scoreName");
+var submitScore = document.getElementById("submit");
 var score = 0;
+var highscoreList = [];
 //question text
 var title = document.getElementById("title");
 var questionText = document.getElementById("question");
@@ -42,21 +45,76 @@ var questionArray = [
         c: "myFunction()",
         d: "new function;",
         answer: "b"
+    },
+    {
+        id: "Question 4",
+        question: "How does a For loop start?",
+        a: "for (i) i++;",
+        b: "for (i=0; i++)",
+        c: "for i<0 ()",
+        d: "for (i=0; i < 10; i++)",
+        answer: "d"
+    },
+    {
+        id: "Question 5",
+        question: "How do you add a comment in JavaScript?",
+        a: "'This is a comment'",
+        b: "//This is a comment",
+        c: "<!-- This is a comment -->",
+        d: "* This is a comment *",
+        answer: "b"
+    },
+    {
+        id: "Question 6",
+        question: "How do you create a JavaScript array?",
+        a: "var colors = red, white, blue",
+        b: "var colors = {'red', 'white', 'blue'}",
+        c: 'var colors = ["red", "white", "blue"]',
+        d: "var colors = (red) (white) (blue)",
+        answer: "c"
+    },
+    {
+        id: "Question 7",
+        question: "Which operator is used to assign a value to a variable?",
+        a: "=",
+        b: "===",
+        c: "+",
+        d: "*",
+        answer: "a"
+    },
+    {
+        id: "Question 8",
+        question: "What is the correct syntax to change the text of a div with an id of demo?",
+        a: "document.getElementById(#demo).textContent = 'Hello';",
+        b: "getID(demo).text = 'Hello'",
+        c: '#demo.textContent = "Hello";',
+        d: 'document.getElementById("demo").textContent = "Hello";',
+        answer: "d"
+    },
+    {
+        id: "Question 9",
+        question: "What is the correct syntax to link an external javascript file called script.js?",
+        a: '<script src=script.js>',
+        b: '<script type="text/javascript" src="script.js"></script>',
+        c: 'script.name = script.js',
+        d: '<link script.js>',
+        answer: "b"
+    },
+    {
+        id: "Question 10",
+        question: "How do you write an IF statement for executing some code if i is not equal to 10?",
+        a: 'if (i != 10)',
+        b: 'if (i not 10)',
+        c: 'if i =! 10 then',
+        d: 'if i *10*',
+        answer: "a"
     }
+
 ]
 
 //Timer
 var timerEl = document.getElementById("timer");
 var seconds = 0;
-
-// function startTimer(){
-//     setInterval(function(){
-//         seconds++;
-//         timerEl.textContent = "Timer: " + seconds;
-//     }, 1000);
-// }
-
-
 
 var myTimer = setInterval(startTimer, 1000);
 function startTimer(){
@@ -78,16 +136,11 @@ function renderQuestion(){
         answer2El.textContent = questionArray[currentQuestion].b;
         answer3El.textContent = questionArray[currentQuestion].c;
         answer4El.textContent = questionArray[currentQuestion].d;
-        
-        //REMOVE THIS LATER
-        console.log(questionArray[currentQuestion]); 
 }
 
-//Show correct answer
 
-    //event listeners for answers
+//event listeners for answers
     answer1El.addEventListener("click",function(){
-        
         if(questionArray[currentQuestion].answer === "a"){
             answer1El.style.backgroundColor = "green";
             score = score + 5;
@@ -95,7 +148,6 @@ function renderQuestion(){
             answer1El.style.backgroundColor = "red";
             score = score - 1;
         }
-
         answer2El.style.pointerEvents = "none";
         answer3El.style.pointerEvents = "none";
         answer4El.style.pointerEvents = "none";
@@ -141,8 +193,6 @@ function renderQuestion(){
 //Next button
 var btnNext = document.getElementById("next");
 btnNext.addEventListener("click", function(){   
-    // IS THIS CORRECT? CONSOLE KEEPS SHOWING THE SAME LAST QUESTION
-
     if(currentQuestion < questionArray.length -1){
         currentQuestion++;
     }else{
@@ -174,7 +224,9 @@ var btnStart = document.getElementById("start");
 btnStart.addEventListener("click", function(){
     startTimer();
     renderQuestion();
+    //hide start button
     startContainer[0].style.display = "none";
+    //show hidden elements
     timerEl.style.display = "flex";
     hidden[0].style.display = "block";
     hidden[1].style.display = "block";
@@ -185,3 +237,16 @@ btnStart.addEventListener("click", function(){
     hidden[6].style.display = "block";
 });
 
+
+//Submit score
+submitScore.addEventListener("click", function(event){
+    event.preventDefault();
+    var newWinner = {
+        firstName: scoreName.value.trim()
+    };
+
+    localStorage.setItem("winner", JSON.stringify(newWinner));
+
+    var winners = JSON.parse(localStorage.getItem("winner"));
+    console.log(winners);
+});

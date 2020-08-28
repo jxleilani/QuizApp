@@ -32,12 +32,26 @@
         </div>
         <div id="highscores">
             <h3>All done!</h3>
-            <br>
+            
+            <div class="board-container">
+                <table id="score-board">
+                    <tr>
+                        <th>Score</th>
+                        <th>Name</th>
+                    </tr>
+                    <tr>
+                        <td>100</td>
+                        <td>Joya</td>
+                    </tr>
+                </table>
+            </div>
             <p>Your score is: <span id="score">0</span></p>
             <div>
-                <textarea placeholder="name" id="scoreName"></textarea>
+                <input type="text" placeholder="Your name" id="scoreName">
             </div>
-            <button id="submit">Submit</button>
+            <div>
+                <input type="submit" value="Submit" id="submit">
+            </div>
         </div>
     </div>
     <div class="timer-container hide" id="timer">

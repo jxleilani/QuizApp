@@ -28,6 +28,21 @@ button {
 button:hover{
     background: #493352;
 }
+input[type="text"] {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+input[type="submit"] {
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #925999;
+    color: #fff;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+}
 .hide {
     display: none;
 }
@@ -84,6 +99,18 @@ button:hover{
     box-shadow: 0 0 10px 5px #000;
     text-align: center;
 }
+.board-container{
+
+}
+#score-board {
+    margin: 10px auto 25px auto;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 10px;
+}  
+
 .timer-container {
     background: white;
     padding: 20px 30px;

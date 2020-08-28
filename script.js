@@ -4,6 +4,7 @@ var startContainer = document.getElementsByClassName("start-container");
 var main = document.getElementById("main");
 //score
 var highscoresEl = document.getElementById("highscores");
+var scoreBoard = document.getElementById("score-board");
 var scoreEl = document.getElementById("score");
 var scoreName = document.getElementById("scoreName");
 var submitScore = document.getElementById("submit");
@@ -111,6 +112,9 @@ var questionArray = [
     }
 
 ]
+
+
+init();
 
 //Timer
 var timerEl = document.getElementById("timer");
@@ -238,15 +242,63 @@ btnStart.addEventListener("click", function(){
 });
 
 
+//Store the scores
+function storeScores(){
+    localStorage.setItem("winner", JSON.stringify(newWinner));
+    //TEST
+    var winners = JSON.parse(localStorage.getItem("winner"));
+    console.log(winners);
+}
+//Render high scores
+function renderScores(){
+    for(var i=0; i < highscoreList.length; i++){
+       
+
+        var newRow = document.createElement("tr");
+        var newScore = document.createElement("td");
+        var newName = document.createElement("td");
+
+        newScore.textContent = score;
+        newName.textContent = highscoreList[i].firstName;
+
+
+        newRow.appendChild(newScore);
+        newRow.appendChild(newName);
+
+        scoreBoard.appendChild(newRow);
+
+    }
+}
+
+function init() {
+    var savedScores = JSON.parse(localStorage.getItem("highscoreList"));
+    if(savedScores !== null){
+        highscoreList = savedScores;
+
+    }
+    renderScores();
+}
+
+var newWinner = {};
 //Submit score
 submitScore.addEventListener("click", function(event){
     event.preventDefault();
-    var newWinner = {
+    newWinner = {
         firstName: scoreName.value.trim()
     };
+    //return early if submitted name is blank
+    if(JSON.stringify(newWinner) === "" ){
+        return;
+    }
+    //push newWinner object nto highscoreList[]
+    highscoreList.push(newWinner);
+    scoreName.value = "";
+    
+    storeScores();
+    renderScores();
 
-    localStorage.setItem("winner", JSON.stringify(newWinner));
-
-    var winners = JSON.parse(localStorage.getItem("winner"));
-    console.log(winners);
+    //TEST REMOVE LATER
+    // localStorage.setItem("winner", JSON.stringify(newWinner));
+    // var winners = JSON.parse(localStorage.getItem("winner"));
+    // console.log(winners);
 });

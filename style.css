@@ -9,7 +9,7 @@ body{
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background: #505050;
+    background: #444444;
     font-family: 'Oxygen', sans-serif;
 }
 a{
@@ -47,7 +47,7 @@ input[type="submit"] {
     display: none;
 }
 .container {
-    background: #8a8888;
+    background: #9e9d9d;
     padding: 20px 30px;
     margin: 10px;
     width: 75vw;
@@ -129,4 +129,18 @@ table, th, td {
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 0 10px 5px #000;
+}
+@media screen and (max-width:414px){
+    .start-container{
+        margin: 0;
+        padding: 0;
+        border: none;
+        box-shadow: none;
+        background: #444444;
+        
+    }
+    #start {
+        margin: 2px;
+        width: 100%;
+    }
 }

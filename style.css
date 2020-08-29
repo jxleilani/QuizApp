@@ -131,7 +131,13 @@ table, th, td {
     box-shadow: 0 0 10px 5px #000;
 }
 @media screen and (max-width:414px){
+    .body{
+        width: 100vw;
+        height: 100vh;
+    }
     .start-container{
+        position: fixed;
+        top: 25%;
         margin: 0;
         padding: 0;
         border: none;

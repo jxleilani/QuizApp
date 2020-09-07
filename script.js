@@ -10,7 +10,7 @@ var scoreName = document.getElementById("scoreName");
 var submitScore = document.getElementById("submit");
 var score = 0;
 var highscoreList = [];
-var winnerObject = {};
+var newWinner = {};
 //question text
 var title = document.getElementById("title");
 var questionText = document.getElementById("question");
@@ -111,9 +111,7 @@ var questionArray = [
         d: 'if i *10*',
         answer: "a"
     }
-
 ]
-
 
 //Timer
 var timerEl = document.getElementById("timer");
@@ -218,7 +216,6 @@ btnNext.addEventListener("click", function(){
     //render the next question
     renderQuestion();
 
-    //TEST
     console.log(score);
 });
 
@@ -241,57 +238,68 @@ btnStart.addEventListener("click", function(){
     hidden[6].style.display = "block";
 });
 
-//SCORE BOARD
+
+
 init();
 
-//Initialize table
-function init(){
-    var storedScores = JSON.parse(localStorage.getItem("scores"));
-    if(storedScores !== null){
-        highscoreList = storedScores;
+//Store the scores
+function storeScores(){
+    localStorage.setItem("high-scores", JSON.stringify(highscoreList));
+}
+
+//Initialize score board
+function init() {
+    var savedScores = JSON.parse(localStorage.getItem("high-scores"));
+    if(savedScores !== null){
+        highscoreList = savedScores;
     }
     renderScores();
 }
-
-//Strigify the highscoreList[] and store in localStorage
-function storeScores(){
-    localStorage.setItem("scores", JSON.stringify(highscoreList));
-}
-
-//RenderScores
+//Render high scores
 function renderScores(){
     scoreBoard.innerHTML = "";
+
     for(var i=0; i < highscoreList.length; i++){
-        var win = highscoreList[i];
+        
 
         var newRow = document.createElement("tr");
-        var newNameData = document.createElement("td");
-        var newScoreData = document.createElement("td");
-        newNameData.textContent = highscoreList[i].name;
-        newScoreData.textContent = highscoreList[i].score;
+        var newScore = document.createElement("td");
+        var newName = document.createElement("td");
 
-        newRow.appendChild(newScoreData);
-        newRow.appendChild(newNameData);
+        newScore.textContent = highscoreList[i].score;
+        newName.textContent = highscoreList[i].firstName;
+
+
+        newRow.appendChild(newScore);
+        newRow.appendChild(newName);
+
         scoreBoard.appendChild(newRow);
 
     }
 }
 
-//Click submit button
+
+
+//Submit score
 submitScore.addEventListener("click", function(event){
     event.preventDefault();
-
-    var nameText = scoreName.value.trim(); 
-
-    if(nameText === ""){
+    newWinner = {
+        firstName: scoreName.value.trim(),
+        score: score
+    };
+    //return early if submitted name is blank
+    if(JSON.stringify(newWinner) === "" ){
         return;
     }
-
-    winnerObject.name = nameText;
-    winnerObject.score = score;
-    highscoreList.push(winnerObject);
+    //push newWinner object nto highscoreList[]
+    highscoreList.push(newWinner);
     scoreName.value = "";
-
+    
     storeScores();
     renderScores();
+
+    //TEST REMOVE LATER
+    localStorage.setItem("winner", JSON.stringify(newWinner));
+    var winners = JSON.parse(localStorage.getItem("winner"));
+    console.log(winners);
 });
